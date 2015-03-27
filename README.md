@@ -17,7 +17,7 @@ Or you can list all the projects using ring.
 
 You can also walk the source code across different projects.
 
-[/ns/org.clojure/tools.analyzer/latest/clojure.tools.analyzer.html#_macroexpand](/ns/org.clojure/tools.analyzer/latest/clojure.tools.analyzer.html#_macroexpand)
+[http://crossclj.info/ns/org.clojure/tools.analyzer/latest/clojure.tools.analyzer.html#_macroexpand](http://crossclj.info/ns/org.clojure/tools.analyzer/latest/clojure.tools.analyzer.html#_macroexpand)
 
 You can also explore Clojurescript (and cljx) projects, 
 
