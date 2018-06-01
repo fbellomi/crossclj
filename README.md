@@ -40,3 +40,6 @@ There is a sub-site focused on ClojureScript
 
 This repository mostly exists to provide an
 [issue tracker](https://github.com/fbellomi/crossclj/issues "Issues").
+
+Some details on the implementation of CrossClj
+[https://www.reddit.com/r/Clojure/comments/8ls9j4/a_new_clojure_documentation_effort/dzvy6ql/](https://www.reddit.com/r/Clojure/comments/8ls9j4/a_new_clojure_documentation_effort/dzvy6ql/)
