@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, minimal-ui, user-scalable=no" name="viewport"/>
+<meta content="clojure" name="keywords"/>
+<meta content="CrossClj, cross-referencing the clojure ecosystem" name="description"/>
+<link rel="search" type="application/opensearchdescription+xml" title="Clojure" href="/opensearch.xml">
+<link rel="apple-touch-icon" sizes="152x152" href="/icon-mobile.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="CrossClj">
+
+<link rel="stylesheet" href="/style/theme.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<title>CrossClj - cross-referencing the clojure ecosystem</title>
+</head>
+<body>
+<div class="header">
+<div class="controls c1"><a href="/">CrossClj</a></div>
+<div class="content c2"><span id="art" class="k1 homev">cross-referencing the Clojure ecosystem</span></div>
+</div>
+<div class="main">
+ <div class="controls c3 c3home">
+<p id="intro"><a href="https://twitter.com/crossclojure" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @crossclojure</a>
+</p>
+ </div>
+<div class="content c4 contenthome">
+<div id="welcome">
+    <br><br><br><span>CrossClj is a tool to explore the interconnected Clojure universe.</span>
+As an example, you can find all the uses of <a href="/fun/clojure.core/reduce.html"><code>reduce</code></a> across all projects, or find all the functions called <a href="/search?q=map"><code>map</code></a>.
+Or you can list all the projects using <a href="/ns/ring/ring-core/latest/project.clj.html"><code>ring</code></a>. You can also walk the <a href="/ns/org.clojure/tools.analyzer/latest/clojure.tools.analyzer.html#_macroexpand">source code</a> across different projects.
+<br><br>
+<div id="w1">How to be listed on CrossClj.info</div>
+<br>
+A project should be automatically listed, provided that the following conditions are met:
+<ul>
+<li>The project is deployed on <a href="http://clojars.org">Clojars</a> under a public group (not a <code>org.clojars.*</code> user group)</li>
+<li>The project uses <a href="http://leiningen.org">Leiningen</a> and provides a <code>project.clj</code> with a description.</li>
+<li>The project has at least one non-<code>SHAPSHOT</code> release.</li>
+<li>Source code is included into project's artifact, and hosted publicly on <a href="http://github.com">GitHub</a> (i.e. there is a <code>github</code> reference on the project's <code>POM</code> under the url or scm/connection fields). This almost ensures that the source code license is compatible with CrossClj's usage.</li>
+</ul>
+</div>
+<footer>Copyright &copy; 2015 CrossClj <a href="https://github.com/fbellomi/crossclj/issues">Feedback</a>. Displayed source code is copyright of respective owners.
+</footer>
+</div>
+</div>
+<form id="sf" action="/search" method="get">
+<span id="search0" class="glyphicon glyphicon-search"></span>
+<input id="search" type="text" name="q" placeholder="prj, ns, var, fn, macro">
+</form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+   <ShortName>Clojure Search</ShortName>
+   <Description>Use CrossClj.info to search the Clojure ecosystem.</Description>
+   <Tags>clj clojure clojurescript</Tags>
+   <Contact>info@crossclj.ingo</Contact>
+   <Url type="text/html"
+        template="http://crossclj.info/search?q={searchTerms}"/>
+   <LongName>CrossClj.info Clojure Ecosystem search</LongName>
+   <Image type="image/vnd.microsoft.icon">http://example.com/favicon.ico</Image>
+   <Developer>CrossClj</Developer>
+   <Attribution>
+       Copyright © 2014 CrossClj info@crossclj.info. Displayed source code is copyright of respective owners.
+   </Attribution>
+   <SyndicationRight>open</SyndicationRight>
+   <AdultContent>false</AdultContent>
+   <Language>en-us</Language>
+   <OutputEncoding>UTF-8</OutputEncoding>
+   <InputEncoding>UTF-8</InputEncoding>
+ </OpenSearchDescription>

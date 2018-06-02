@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, minimal-ui, user-scalable=no" name="viewport"/>
+<meta content="CrossClj, cross-referencing the clojure ecosystem - catalog of all indexed artifacts" name="description"/>
+<link rel="search" type="application/opensearchdescription+xml" title="CrossClj" href="/opensearch.xml">
+<link rel="apple-touch-icon" sizes="152x152" href="/icon-mobile.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="CrossClj">
+
+<link rel="stylesheet" href="/style/theme.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<title>Catalog of all indexed artifacts - CrossClj</title>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+<div class="header">
+<div class="controls c1"><a href="/">CrossClj</a></div>
+<div class="content c2"><span id="art" class="k1 homev">cross-referencing the Clojure ecosystem</span></div>
+</div>
+<div class="main">
+<div class="controls c3 c3home">
+<br><div id="blurb"></div>
+<br><a href="faq.html">How to be listed</a><br><br>
+<p id="intro"><a href="https://twitter.com/crossclojure" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @crossclojure</a>
+</p>
+<div id="history">
+<svg width="30" height="30"><circle cx="15" cy="15" fill="rgb(255,200,200)" r="15"></circle></svg>
+<div class="stit">RECENT</div>
+<ul id="history-list"></ul>
+</div>
+ </div>
+<div class="content c4 contenthome">
+
+    <div class="welcome">
+        <span class="w1">List of all indexed artifacts. <a href="http://crossclj.info/docs.html">Search docs</a> | <a href="http://crossclj.info">Search identifiers</a></span>
+    </div>
+
+    <br>
+    <div id="index"></div>
+    <br>
+    <div id="catalog"></div>
+    <br>
+    <div id="index2"></div>
+    <br>
+
+    <footer>Copyright &copy; 2015 <a href='https://twitter.com/crossclojure'>CrossClj</a>, <a href='https://twitter.com/fbellomi'>@fbellomi</a>, <a href="https://github.com/fbellomi/crossclj/issues">Feedback</a>. Displayed source code is copyright of respective owners.
+        Hosted on <a href="https://www.digitalocean.com/?refcode=bebc193d626c">DigitalOcean</a>
+    </footer>
+
+</div>
+</div>
+<script>
+$(function() {
+    var resize= function() {
+        var c4 = $(".c4");
+            c4.css("width", ($(window).width()-c4.offset().left)+"px");
+        var c3w = $(".c3").width();
+        c4.offset({left: c3w, top:c4.offset().top});
+        $(".c3,.c4").css("height", ($(window).height()-45)+"px");
+    };
+    resize();
+    $(window).resize(resize);
+
+
+
+
+
+    try
+    {
+        var history = (localStorage['his'] || "").split("^%"), h="";
+        for (var i = 0, n = Math.min(20, history.length); i < n; i++)
+        {
+            var k = history[i].split("||");
+            h += "<li><a class=ns1 href='" + k[1] + "'>" + k[0] + "</a></li>";
+        }
+        $("#history-list").html(h);
+    }
+    catch (e)
+    {
+    }
+});
+
+</script>
+</body>
+</html>

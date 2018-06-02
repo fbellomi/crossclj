@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, minimal-ui, user-scalable=no" name="viewport"/>
+<meta name="keywords"/>
+<meta name="description"/>
+<link rel="apple-touch-icon" sizes="152x152" href="/icon-mobile.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="CrossClj">
+
+<link rel="stylesheet" href="/style/theme.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<title>Clojure documentation search - CrossClj - cross-referencing the clojure ecosystem</title>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="/js/share.min.js"></script>
+</head>
+<body>
+<div class="header">
+<div class="controls c1"><a href="/">CrossClj</a></div>
+<div class="content c2"><span id="art" class="k1 homev">full-text documentation search</span></div>
+</div>
+<div class="main">
+<div class="controls c3 c3home">
+<br><div id="blurb"></div>
+<br><a href="faq.html">How to be listed</a><br>
+<br><a href="catalog.html?index=a">Artifact list</a><br>
+<br><a href="https://github.com/fbellomi/crossclj/issues">Feedback</a><br>
+
+<br>
+<p id="intro"><a href="https://twitter.com/crossclojure" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @crossclojure</a>
+</p>
+<div id="history">
+<svg width="30" height="30"><circle cx="15" cy="15" fill="rgb(255,200,200)" r="15"></circle></svg>
+<div class="stit">RECENT</div>
+<ul id="history-list"></ul>
+</div>
+ </div>
+<div class="content c4 contenthome">
+    <div id="tinan" style="display:none"></div>
+
+<!-- search -->
+
+<div style="font-style: normal; color: rgb(100, 100, 100)">Less
+<svg width="136" height="16" style="vertical-align:-2px">
+<circle cx="8" cy="8" fill="rgb(245,245,243)" r="8"></circle>
+<circle cx="28" cy="8" fill="rgb(248,238,225)" r="8"></circle>
+<circle cx="48" cy="8" fill="rgb(248,228,195)" r="8"></circle>
+<circle cx="68" cy="8" fill="rgb(248,218,165)" r="8"></circle>
+<circle cx="88" cy="8" fill="rgb(248,208,135)" r="8"></circle>
+<circle cx="108" cy="8" fill="rgb(248,198,125)" r="8"></circle>
+<circle cx="128" cy="8" fill="rgb(248,178,105)" r="8"></circle>
+</svg>
+more depended upon.
+</div>
+    <form action="/docsjs.html" method="get">
+
+<div id="oink1">
+    <span id="oinkx" class="glyphicon glyphicon-search"></span>
+<input id="oink" name="q" type="text" placeholder="docs for Cljs fns, vars, ns, projects" onKeyPress="return checkSubmit(event)">
+    </div>
+    </form>
+<div class="welcome">
+    <span class="w1">Full-text search for function, var, namespace, project documentation and descriptions for Clojure open-source projects.</span>
+    <br>
+    Query syntax supports boolean modifiers (+word, -word), wildcards (* and ?, except for the first character of a word), and phrases ("word1 word2").
+    <br>To search for identifiers, use the <a href="/index.html">name search</a>.
+    <br><br><span class="w1">This is the Clojurescript subsite. You can go to the <a href="docs">full Clojure</a> documentation search page.</span>
+</div>
+
+<div id="searchresults"></div>
+
+
+<footer>Copyright &copy; 2015 <a href='https://twitter.com/crossclojure'>CrossClj</a>, <a href='https://twitter.com/fbellomi'>@fbellomi</a>, <a href="https://github.com/fbellomi/crossclj/issues">Feedback</a>. Displayed source code is copyright of respective owners.
+    Hosted on <a href="https://www.digitalocean.com/?refcode=bebc193d626c">DigitalOcean</a>
+</footer>
+
+</div>
+</div>
+<script>
+    var lastOpened = null;
+    var flyo = $("#tinan");
+
+
+    function checkSubmit(e)
+    {
+       if(e && e.keyCode == 13)
+       {
+          document.forms[0].submit();
+       }
+    }
+
+$(function() {
+    var resize= function() {
+        var c4 = $(".c4");
+        var c3w = $(".c3").width();
+        var wi = Math.max(($(window).width() - 100 - c3w), 300) + "px";
+        var oink = $("#oink");
+        var dd = $(".tt-dropdown-menu");
+        dd.css("width", wi).css("max-height", ($(window).height()-oink.offset().top-oink.height()+$(window).scrollTop()-20)+"px");
+        c4.offset({left: c3w, top:c4.offset().top});
+        $(".c3,.c4").css("height", ($(window).height()-45)+"px");
+        $("#oink1").css("width", Math.max(($(window).width()-20-c3w), 300)+"px");
+        oink.css("width", wi);
+    };
+    $(window).resize(resize);
+
+
+    $(".dirl").on("click", function() {
+        var pro = $(this);
+        if (lastOpened == this)
+        {
+            flyo.css("display","none");
+            lastOpened = null;
+            return;
+        }
+        var o = pro.offset();
+        var he = pro.height();
+    flyo.css("display","block").offset({top: o.top+he+2-$(window).scrollTop(), left: o.left-$(window).scrollLeft()})
+            .html("<a class=tinalink href='" + pro.attr("href-ns")+ "'>source code</a><a class=tinalink href='" + pro.attr("href-doc")+ "'>generated documentation</a><a class=tinalink href='" + pro.attr("href-prj")+ "'>lein project + deps</a>")
+            ;
+        lastOpened = this;
+    }).hover(
+            function() { $(this).addClass("dirhover"); },
+            function() { $(this).removeClass("dirhover"); }
+        );
+
+    flyo.offset({top: 0, left: 0});
+    try
+    {
+        var history = (localStorage['his'] || "").split("^%"), h="";
+        for (var i = 0, n = Math.min(20, history.length); i < n; i++)
+        {
+            var k = history[i].split("||");
+            h += "<li><a class=ns1 href='" + k[1] + "'>" + k[0] + "</a></li>";
+        }
+        $("#history-list").html(h);
+    }
+    catch (e)
+    {
+    }
+
+
+    resize();
+});
+
+</script>
+</body>
+</html>

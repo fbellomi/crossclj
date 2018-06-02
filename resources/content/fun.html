@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, minimal-ui, user-scalable=no" name="viewport"/>
+<meta name="keywords"/>
+<meta name="description"/>
+<meta name="summary"/>
+<link rel="apple-touch-icon" sizes="152x152" href="/icon-mobile.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CrossClj">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="/style/theme.css">
+<link rel="shortcut icon" href="/favicon.ico">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/js/typeahead.bundle.min.js?e=1"></script>
+<script src="/js/sh.js?e=2"></script>
+<title>CrossClj</title>
+</head>
+<body>
+<div class="header">
+<div class="controls c1"><a href="/">CrossClj</a></div>
+<div class="content c2"> <a id="ns" class="k2">clojure.core</a>/<a id="fun" class="k1">map</a></div>
+</div>
+<div class="main">
+<div class="controls c3">
+<span id="projs"></span>
+<div id="history">
+<svg width="30" height="30"><circle cx="15" cy="15" fill="rgb(255,200,200)" r="15"></circle></svg>
+<div class="stit">RECENT</div>
+<ul id="history-list"></ul>
+</div>
+</div>
+<div class="content c4">
+<div id="tinan" style="display:none"></div>
+<div id="cont0">
+<div id="arglist"></div>
+<div id="typelist"></div>
+<pre class="bdocs" id="dox"></pre>
+<p class="sim0" id="reshd"></p>
+<p class="sim0">Search for vars with similar names in all artifacts: <span id="sim"></span></p>
+<p class="sim0" id="slp">Search for <span id="simd"></span> in the documentation of all artifacts.</p>
+<p class="sim0" id="grimo"></p>
+<div id="contx" class="hdir">
+   --- content
+</div>
+<div id="funsource">
+<a id="source"></a>
+<div id="funtitle">Source code</div>
+<div id="sclink"></div>
+<div id="cont1" style="display:none">
+<pre id="cont"  >
+</pre>
+</div>
+</div>
+<div id="zc1">
+<footer>
+<br>Copyright &copy; 2015 <a href='https://twitter.com/crossclojure'>CrossClj</a>, <a href='https://twitter.com/fbellomi'>@fbellomi</a>, <a href="https://github.com/fbellomi/crossclj/issues">Feedback</a>. Displayed source code is copyright of respective owners.
+    Hosted on <a href="https://www.digitalocean.com/?refcode=bebc193d626c">DigitalOcean</a>
+
+<div id="random0"></div>
+
+</footer>
+</div>
+</div>
+</div>
+</div>
+<span id="sf">
+<span id="search0" class="glyphicon glyphicon-search"></span>
+<input id="search" type="text" name="q" placeholder="prj, ns, var, fn, macro">
+</span>
+<div id="simp" style="display:none"></div>
+<script id="precont"></script>
+<script>
+SyntaxHighlighter.all();
+$(function() {
+    var resize= function() {
+        var c3w = $(".c3").width();
+        var wi = Math.max(($(window).width() - 100 - c3w), 300) + "px";
+        var oink = $("#search");
+        var dd = $(".tt-dropdown-menu");
+        dd.attr("style", "display:none;position:fixed;top:25px;right:10px").css("width", wi).css("max-height", ($(window).height()-oink.offset().top-oink.height()+$(window).scrollTop()-20)+"px");
+
+        var c4 = $(".c4");
+        c4.css("width", ($(window).width()-c4.offset().left)+"px"); $(".c3, .c41, .c4, .c42").css("height", ($(window).height()-45)+"px")};
+    resize();
+    $(window).resize(resize);
+
+try
+{
+var history = (localStorage['his'] || "").split("^%"), h="";
+for (var i = 0, n = Math.min(20, history.length); i < n; i++)
+{
+var k = history[i].split("||");
+h += "<li><a class=ns1 href='" + k[1] + "'>" + k[0] + "</a></li>";
+}
+$("#history-list").html(h);
+}
+catch (e)
+{
+}
+
+var a10 = Bloodhound.tokenizers.obj.nonword("project"),
+    a2 = Bloodhound.tokenizers.obj.nonword("ns"),
+    a3 = Bloodhound.tokenizers.obj.whitespace("name");
+
+var engine = new Bloodhound({
+name: "crossclj",
+datumTokenizer: function(d) {return a3(d).concat(d.type == 0 ? a10(d) : a2(d)); },
+queryTokenizer: Bloodhound.tokenizers.whitespace,
+limit: 300,
+prefetch: {
+    url: "/api/v1/prefetch-home",
+    filter: function(r) {
+        var s = [], y = r.split("|"), z = y.length;
+        for (var i = 0, c = 0; i < z; i+=6) {
+            s[c++] = { g: y[i], project: y[i+1], ver: y[i+2], ns: y[i+3], name: y[i+4], text: y[i+5], type: 0 };
+        }
+        return s;
+    }
+},
+    remote: {
+        url: "/api/v1/search?query=%QUERY&limit=300"
+    }
+});
+
+//engine.clearPrefetchCache();
+//engine.clearRemoteCache();
+engine.initialize();
+$("#search").typeahead({},
+ {
+   name: "prjs", source: engine.ttAdapter(),
+     templates: { suggestion: function(s) {
+         if (s.type == 0)
+         {
+             var proj = s.project.split("/")[0];
+            return "<p><span class=\"circle g" + s.g + "\"></span><a href=\"/doc/" + s.project + "/" + s.ver +
+                    "/index.html\">doc</a> <a href=\"/ns/" + s.project + "/" + s.ver + "/" + s.ns + ".html\">src</a> <a href=\"/ns/" +
+                    s.project + "/" + s.ver + "/project.clj.html\">prj</a> <span class=tts1>" +
+                    s.name + "</span> <span class=tts2>[" + proj + "]</span> <span class=tts3>" + s.text + "</span></p>";
+         }
+         else if (s.type == 1)    // ns
+         {
+             return '<p><span class=nsq></span><a href="/doc/' + s.art + '/latest/' + s.ns + '.html">doc</a> <a href="/ns/' + s.art + '/latest/' + s.ns + '.html">src</a> <span class=tts2>[' + s.art + '] </span><span class=tts1>' + s.ns + '</span> <span class=tts3>' + s.text + '</span></p>';
+         }
+         else if (s.type == 2)    // var
+         {
+             var ec = encodeURIComponent(s.name);
+             return '<p><span class=varq></span><a href="/fun/' + s.ns + '/' + ec + '.html">doc+usage</a> <a href="/ns/' + s.art + '/latest/' + s.ns + '.html#_' + ec + '">src</a> <span class=tts2>[' + s.art + '] ' + s.ns + '/</span><span class=tts1>' + s.name + '</span> <span class=tts3>' + s.text + '</span></p>';
+         }
+     } }
+ }).removeAttr("style").on("typeahead:selected", function(e,d,_) {
+            if (d.type == 0)
+            {
+                window.location.href = '/ns/' + d.project + '/' + d.ver + '/' + d.ns + '.html';
+            }
+            else if (d.type == 1)
+            {
+                window.location.href = '/ns/' + d.art + '/latest/' + d.ns + '.html';
+            }
+            else if (d.type == 2)
+            {
+                window.location.href = '/fun/' + d.ns + '/' + encodeURIComponent(d.name) + '.html';
+            }
+        });
+$(".tt-hint").css("display","none");
+    resize();
+
+    var lastOpened = null;
+    var flyo2 = $("#tinan");
+
+    $(".dirl").hover(
+    function ()
+    {
+        $(this).addClass("dirhover");
+    },
+    function ()
+    {
+        $(this).removeClass("dirhover");
+    })
+    .on("click", function ()
+    {
+
+        var pro = $(this);
+        if (lastOpened == this)
+        {
+            flyo2.css("display", "none");
+            lastOpened = null;
+            return;
+        }
+        var o = pro.offset();
+        var he = pro.height();
+        flyo2.css("display", "block").offset({top: o.top+he+2-$(window).scrollTop(), left: o.left-$(window).scrollLeft()})
+                .html("<a class=tinalink href='" + pro.attr("href-ns") + "'>source code</a><a class=tinalink href='" + pro.attr("href-doc") + "'>generated documentation</a><a class=tinalink href='" + pro.attr("href-prj") + "'>lein project + deps</a>")
+                ;
+        lastOpened = this;
+    }).hover(
+    function ()
+    {
+        $(this).addClass("dirhover");
+    },
+    function ()
+    {
+        $(this).removeClass("dirhover");
+    }
+    );
+    flyo2.offset({top: 0, left: 0});
+
+
+var flyo = $("#simp");
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+$("a.a").mouseenter(function() {
+    var h = $(this).attr("href");
+    if (h.endsWith("#")) return;
+    var o = $(this).offset(),hr=h.split("/"),l=hr.length,art,vl=hr[l-1].split("#_"),vl0;
+if (vl[1]==undefined) return;
+if (vl[0].endsWith(".cljs.html"))
+    vl0 = vl[0].substring(0, vl[0].length-10);
+else if (vl[0].endsWith(".html"))
+    vl0 = vl[0].substring(0, vl[0].length-5);
+var v=vl0+"/"+decodeURIComponent(vl[1]);
+if (l == 5)
+    art = hr[2];
+else
+    art = hr[2]+"/"+hr[3];
+flyo.css("display","block").offset({top: o.top-41, left: o.left-6}).html("<div class=overart>"+art+"</div><div class=overns>"+v+"</div>");})
+        .mouseleave(function() {flyo.css("display","none");});
+
+
+
+var u = function(e) {return "u_"+$(e).text().replace(/[:?<>*/]/g, "_");};
+setTimeout(function() {$(".constants, .symbol, .variable, .functions:not(:has(a)), .color3").addClass(function(_,_1) { return u(this); })
+.mouseenter(function() { $("."+u(this)).addClass("idselec"); })
+.mouseleave(function() { $("."+u(this)).removeClass("idselec"); });}, 500);
+});
+</script>
+</body>
+</html>
