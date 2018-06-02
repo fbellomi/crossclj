@@ -79,7 +79,7 @@ https://github.com/clojars/clojars-web/wiki/Data
 
 4) it parses all the source code with tools.analyzer 
 
-5) ...which produces a very detailed AST (see http://clojure.github.io/tools.analyzer/spec/quickref.html ofr reference) which includes, for each symbol in the source code, both the position in the source code itself, and the fully qualified reference (ie. var, local binding...)
+5) ...which produces a very detailed AST (see http://clojure.github.io/tools.analyzer/spec/quickref.html for reference) which includes, for each symbol in the source code, both the position in the source code itself, and the fully qualified reference (ie. var, local binding...)
 
 6) this information is then put in a global "coordinate system" for the cross-referenced entities,  <group, project, version, namespace, var> and the project-local qualified names are resolved into the full coordinates (e.g. project.clj is used to resolve the libraries)
 
