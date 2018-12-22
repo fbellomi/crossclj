@@ -1,7 +1,7 @@
 CrossClj – cross-referencing the Clojure(Script) universe
 ======================
 
-Note: CrossClj website will be closed on 2018-12-31. After that date some link in this page will become invalid.
+Note: CrossClj website will be closed on 2018-12-31. After that date some links in this page will become invalid.
 
 CrossClj is a tool to explore the interconnected Clojure universe. 
 
