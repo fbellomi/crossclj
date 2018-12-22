@@ -1,6 +1,8 @@
 CrossClj – cross-referencing the Clojure(Script) universe
 ======================
 
+Note: CrossClj website will be closed on 2018-12-31. After that date some link in this page will become invalid.
+
 CrossClj is a tool to explore the interconnected Clojure universe. 
 
 [http://crossclj.info](http://crossclj.info)
@@ -46,7 +48,7 @@ while I was still learning and experimenting with the language. Also, it started
 experiment, that was never meant for publication as source code.
 
 As such, both as a Clojure application and a web application, CrossClj is not 
-"aesthetically pleasant", or safe, by my current standards, and makes use of a number of anti-patterns.
+"aesthetically pleasant", or safe, by my current standards, and it makes use of a number of anti-patterns.
 
 Still, I decided to make the source code available, in the hope that it will be useful to some people that have expressed interest in it.
 
