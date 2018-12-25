@@ -90,3 +90,10 @@ https://github.com/clojars/clojars-web/wiki/Data
 Some further discussion on the implementation of CrossClj may be found here:
 
 [https://www.reddit.com/r/Clojure/comments/8ls9j4/a_new_clojure_documentation_effort/dzvy6ql/](https://www.reddit.com/r/Clojure/comments/8ls9j4/a_new_clojure_documentation_effort/dzvy6ql/)
+
+License
+=======
+
+Copyright © 2013-2018 Francesco Bellomi
+
+Distributed under the Eclipse Public License, the same as Clojure.
